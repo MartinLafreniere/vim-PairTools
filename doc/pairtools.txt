@@ -7,21 +7,21 @@
 
 Help on PairTools                                     *pairtools-help*
 
-|1.| Foreword			    |pairtools-foreword|
-|2.| Introduction		    |pairtools-intro|
-|3.| Options                        |pairtools-options|
-|4.| Features			    |pairtools-features|
-    |4.1| Auto-Close			|pt-auto-close|
-        |4.1.1| Forced Pairs            |pt-forced-pairs|
-    |4.2| Antimagic Field		|pt-antimagic-field|
-    |4.3| Smart-Close                   |pt-smart-close|
-    |4.4| Pair Deletion			|pt-pair-deletion|
-    |4.5| Surround			|pt-surround|
+|1.| Foreword						|pairtools-foreword|
+|2.| Introduction					|pairtools-intro|
+|3.| Options						|pairtools-options|
+|4.| Features						|pairtools-features|
+    |4.1| Auto-Close				|pt-auto-close|
+        |4.1.1| Forced Pairs		|pt-forced-pairs|
+    |4.2| Antimagic Field			|pt-antimagic-field|
+    |4.3| Smart-Close				|pt-smart-close|
+    |4.4| Pair Deletion				|pt-pair-deletion|
+    |4.5| Surround					|pt-surround|
     |4.6| Carriage Return Expansion	|pt-carriage-return-expansion|
-    |4.7| Special Handlings             |pt-special-handling|
+    |4.7| Special Handlings         |pt-special-handling|
 |5.| Installation                   |pairtools-install|
-|6.| Filetype Files Examples        |pairtools-examples|
-|7.| Few Thoughts		    |pairtools-thoughts|
+|6.| Filetype Files Examples		|pairtools-examples|
+|7.| Few Thoughts					|pairtools-thoughts|
 |8.| License                        |pairtools-license|
 |9.| Credits                        |pairtools-credits|
 
@@ -92,48 +92,48 @@ Note: All options are enabled by default.
 While describing the options, we will use the following notation to write the
 name of an option: >
 
-	let g:{filetype}_option = 1
+		let g:{filetype}_option = 1
 <
 The {filetype} placeholder must be replace by your filetype name. For example,
 this auto-close option would be defined for the C++ filetype in cpp.vim as: >
 
-	let g:cpp_autoclose = 1
+		let g:cpp_autoclose = 1
 <
 
 The PairTool plugin uses the standard Vim way to disable a plugin. To do so
 simply set in you vimrc file the following line: >
 	
-	let g:loaded_PairTools = 1
+		let g:loaded_PairTools = 1
 <
 This will prevent the plugin from loading.
 
 It is also possible to disable or enable the plugin per filetype: >
 
-        " Enable pairtools for current filetype
-        let g:{filetype}_pairtools = 1
-        " Disable pairtools for current filetype
-        let g:{filetype}_pairtools = 0
+		" Enable pairtools for current filetype
+		let g:{filetype}_pairtools = 1
+		" Disable pairtools for current filetype
+		let g:{filetype}_pairtools = 0
 <
 The pairs to be used with most of the features are defined using a string. To
 customize your own pairs you can define this string as follow: >
 
-	let g:{filetype}_closepairs = "(:),':'"
+		let g:{filetype}_closepairs = "(:),':'"
 <
 The pairs string defaults to: >
 
-        "(:),{:},[:],\":\",':'"
+		"(:),{:},[:],\":\",':'"
 <
 The |auto-close| and |forced-pairs| features can be enabled/disabled as follow: >
 
         " Enable auto-close
-	let g:{filetype}_autoclose = 1
-	" Disable auto-close
-	let g:{filetype}_autoclose = 0
+		let g:{filetype}_autoclose = 1
+		" Disable auto-close
+		let g:{filetype}_autoclose = 0
 <
 It is possible to define another mapping for the |forced-pairs| features. It can
 be set using the follow declaration: >
 
-        let g:{filetype}_forcedpairskey = "key"
+		let g:{filetype}_forcedpairskey = "key"
 <
 More information on what to map is provided in the |forced-pairs| section.
 
@@ -141,18 +141,18 @@ It is possible to define some syntax fields where you want to prevent the
 auto-closing mechanism and related features. The PairTools plugin uses a 
 feature called Antimagic Field which allow you to define these syntax fields: >
 
-	let g:{filetype}_antimagicfield = "String,Comment,Special"
+		let g:{filetype}_antimagicfield = "String,Comment,Special"
 <
 The |antimagic-field| defaults to: >
 
-        "Comment,String"
+		"Comment,String"
 <
 The |antimagic-field| feature can be enabled/disabled as follow: >
 
-	" Enable Antimagic Field
-	let g:{filetype}_antimagic = 1
-	" Disable Antimagic Field
-	let g:{filetpye}_antimagic = 0
+		" Enable Antimagic Field
+		let g:{filetype}_antimagic = 1
+		" Disable Antimagic Field
+		let g:{filetpye}_antimagic = 0
 <
 The |smart-close| feature can be set as follow: >
 
@@ -160,31 +160,39 @@ The |smart-close| feature can be set as follow: >
 <
 And it can be turned on/off: >
 
-        " Enable Smart-Close
-        let g:{filetype}_smartclose = 1
-        " Disable Smart-Close
-        let g:{filetype}_smartclose = 0
+		" Enable Smart-Close
+		let g:{filetype}_smartclose = 1
+		" Disable Smart-Close
+		let g:{filetype}_smartclose = 0
 <
 The |pair-deletion| feature can be enabled/disabled as follow: >
 
-	" Enable Pair Deletion
-	let g:{filetype}_pairdeletion = 1
-	" Disable Pair Deletion
-	let g:{filetype}_pairdeletion = 0
+		" Enable Pair Deletion
+		let g:{filetype}_pairdeletion = 1
+		" Disable Pair Deletion
+		let g:{filetype}_pairdeletion = 0
 <
-The |surround| feature (both inline and block) can enabled/disabled as follow: >
+The |surround| feature can be enabled/disabled globally: >
 
-	" Enable Surround
-	let g:{filetype}_surround = 1
-	" Disable Surround
-	let g:{filetype}_surround = 0
+		" Enable Surround Globally
+		let g:pairtools_surround = 1
+		" Disable Surround Globally
+		let g:pairtools_surround = 0
+<
+The |surround| feature (both inline and block) can enabled/disabled for the 
+current filetype as follow: >
+
+		" Enable Surround For Filetype
+		let g:{filetype}_surround = 1
+		" Disable Surround For Filetype
+		let g:{filetype}_surround = 0
 <
 The |carriage-return-expansion| feature can be enabled/disable as follow: >
 
-	" Enable Carriage Return Expansion
-	let g:{filetype}_crexpand = 1
-	" Disable Carriage Return Expansion
-	let g:{filetype}_crexpand = 0
+		" Enable Carriage Return Expansion
+		let g:{filetype}_crexpand = 1
+		" Disable Carriage Return Expansion
+		let g:{filetype}_crexpand = 0
 >
 ==============================================================================
 *4.* Features                                           *pairtools-features*

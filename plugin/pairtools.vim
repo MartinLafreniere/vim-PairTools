@@ -823,6 +823,9 @@ function! s:SetPairToolsOptions() " --- {{{2
     
     " Enable Surround Feature 
     let b:Surround = 1
+    if exists('g:pairtools_surround')
+        let b:Surround = g:pairtools_surround
+    endif
     let b:FT_Surround = "g:" . &ft . "_surround"
     if exists(b:FT_Surround)
         exe "let b:Surround = " . b:FT_Surround 

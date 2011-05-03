@@ -75,9 +75,9 @@ available in the |pairtools-features| section.
 The PairTools plugin allows the user to define options per filetype. To define 
 these filetype options the user must create a {filetypename}.vim in the
 ftplugin directory from the first location in 'runtimepath'. The following
-examples are good candidates under Linux and Windows:
+examples are good candidates under Unix and Windows:
 
-        Linux:   ~/.vim/ftplugin/ 
+        Unix:   ~/.vim/ftplugin/ 
         Windows: $HOME\vimfiles\ftplugin\
 
 For example, if the user wants to define options for the C++ filetype, he must
@@ -434,12 +434,28 @@ user should use the |forced-pairs| sub-feature.
 ==============================================================================
 *5.* Installation                                       *pairtools-install*
 
-The PairTools plugin is easily installed. Just drop the pairtools.vim into the
-user plugin directory and the pairtools.txt into the doc directory.
+5.1 The Easy Way
+
+Windows users can run setup.bat, and Unix users can run setup.pl. The setup
+scripts can take as an optional argument the user vimfiles path, if it is
+not located at %HOME%\vimfiles or $HOME/.vim.
+
+It will copy all files into the proper folders and run a quick vim session to
+call helptags on the user doc folder and exit.
+
+Here is an example when specifying a path: >
+
+        Windows: setup.bat C:\my\folder\vimfiles
+        Unix:    setup.pl /my/folder/.vim
+<
+5.2 The Hard Way
+
+Just drop plugin/pairtools.vim into the user plugin directory and 
+doc/pairtools.txt into the doc directory.
 
 To install the help file, use the following command inside Vim: >
     
-        :helptags ~/.vim/doc            (Linux)
+        :helptags ~/.vim/doc            (Unix)
         :helptags $HOME\vimfiles\doc    (Windows)
 <
 Now all that remains is to set the features options per filetypes using the 

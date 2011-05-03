@@ -1,3 +1,26 @@
-PairTools is a Vim plugin to manage autoclosing pairs with basic surround abilities.
+PairTools is a Vim plugin to manage auto-close pairs with basic surround abilities.
 
-See the plugin accompanying help files for more information.
+See the plugin accompanying help file for more information.
+
+There are now two ways to install this plugin
+
+1. The hard way:
+    Manually copy plugin/pairtools.vim into your plugin directory.
+    Manually copy doc/pairtools.txt into your doc directory.
+    Run helptags on 'your/user/path/to/doc'
+
+2. The easy way:
+    For Windows users you can run setup.bat
+    For Unix, Linux, MacOS X, you can run setup.pl (Not fully tested.)
+
+    The installation script can take zero or one argument.
+    - When no argument is passed, the script will use %USERPROFILE%\vimfiles under Windows, and 
+    $HOME/.vim under Unix.
+    - When an argument is passed, it must be the full path, either absolute or relative, to the
+    installation directory. However, the plugin and doc folders must already exist inside this
+    directory.
+    
+    It will automatically copy all files and run a vim session to call helptags on the 
+    'your/vim/files/path/to/doc' folder and quit.
+
+

@@ -1,4 +1,3 @@
-" ----------------------------------------------------------------------------
 " Vim plugin for various pair operations
 " Last Change: 2011 Apr 20
 " Maintainer:  Martin Lafreniere <pairtools@gmail.com>

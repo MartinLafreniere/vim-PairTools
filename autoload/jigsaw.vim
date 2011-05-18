@@ -1,5 +1,5 @@
 " jigsaw.vim - PairTools module handling various keys with side-effects
-" Last Changed: 2011 May 12
+" Last Changed: 2011 May 17
 " Maintainer:   Martin Lafreniere <pairtools@gmail.com>
 "
 " Copyright (C) 2011 by Martin Lafrenière
@@ -58,6 +58,10 @@ function! Jigsaw#AddBackspaceHook(HookFullName, HookReturnValue)
 
 endfunction
 
+function! Jigsaw#NoErase()
+    return 0
+endfunction
+
 "}}}1
 
 " Carriage Return Hook API {{{1
@@ -95,6 +99,10 @@ function! Jigsaw#AddCarriageReturnHook(HookFullName, HookReturnValue)
         let b:PTCarriageReturnHookTable[a:HookFullName] = a:HookReturnValue
     endif
 
+endfunction
+
+function! Jigsaw#NoExpand()
+    return 0
 endfunction
 
 "}}}1

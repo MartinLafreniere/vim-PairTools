@@ -1,5 +1,5 @@
 " pairclamp.vim - PairTools module handling single character pairs
-" Last Changed: 2011 May 11
+" Last Changed: 2011 May 17
 " Maintainer:   Martin Lafreniere <pairtools@gmail.com>
 "
 " Copyright (C) 2011 by Martin Lafrenière
@@ -30,6 +30,8 @@ function! PairClamp#Close(Key)
     if !b:PTAutoClose
         return a:Key
     endif
+
+    echom a:Key
 
     let line   = getline('.')
     let column = col('.') - 1
@@ -209,13 +211,12 @@ function! s:SmartRegex()
         let b:PTReSmartCache.rules = b:PTSmartCloseRules
 
         let rules = split(b:PTSmartCloseRules, ',')
-
         " Replace ^ by all Work Pairs
         let uparrow = index(rules, '^')
         
         if uparrow > -1
-        
-            let rules = remove(rules, uparrow)
+
+            call remove(rules, uparrow)
 
             for key in keys(b:PTWorkPairs)
                 call add(rules, key)

@@ -1,5 +1,5 @@
 " tagwrench.vim - PairTools module handling angle brackets pair and XML/HTML tags
-" Last Changed: 2011 May 12
+" Last Changed: 2011 May 17
 " Maintainer:   Martin Lafreniere <pairtools@gmail.com>
 "
 " Copyright (C) 2011 by Martin Lafrenière
@@ -363,11 +363,12 @@ endfunction
 
 "}}}1
 
-" TagWrench Hook API {{{1
+" TagWrench Hook Public API {{{1
 
 function! s:TagHook(ContextBegin, ContextEnd)
 
     " Add built in hook if not already done
+    call TagWrench#AddHook('TagWrench#BuiltinNoHook')
     call TagWrench#AddHook('TagWrench#BuiltinBasicTagHook')
     call TagWrench#AddHook('TagWrench#BuiltinHTML5Hook')
 
@@ -396,9 +397,10 @@ function! TagWrench#AddHook(HookFullName)
 endfunction
 
 
-function! TagWrench#BuiltinNoHook(ContextBegin, ContextEnd, ...)
+function! TagWrench#BuiltinNoHook(ContextBegin, ContextEnd)
 
     " Do nothing
+    return
     
 endfunction
 
@@ -497,6 +499,5 @@ function! s:SurroundClosingTag(OpeningEnd)
 endfunction
 
 " }}}1
-
 
 " vim: set fdm=marker :

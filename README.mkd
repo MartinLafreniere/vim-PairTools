@@ -1,5 +1,5 @@
 VIM PairTools 1.5
-===================
+=================
 
 Changes
 -------
@@ -21,7 +21,7 @@ occured:
     hook functions to decided when ending tags should be inserted, and much 
     more. For more details see the help file.
 
-4.  A new module call Jigsaw now handle backspace <BS> and carriage return 
+4.  A new module call Jigsaw now handle backspace &lt;BS> and carriage return 
     <CR> hook functions to call based on the current context. For example, the 
     PairClamp context will delete defined pairs, and the TagWrench context 
     will delete angle bracket pairs, but also single tags and a pair of 
@@ -35,8 +35,7 @@ occured:
     version 1.5, all options are disabled by default.
 
 6.  A vimball is now provided and can be downloaded at:
-
-        www.vim.org/scripts/script.php?script_id=3560
+    http://www.vim.org/scripts/script.php?script_id=3560
 
 
 Description
@@ -54,9 +53,8 @@ Installation
 
 There are a few ways to install the plugin:
 
-1. Using `git clone` manually copy all files
-2. Using `git clone` launch `vim pairtools.vba` followed by `:so %` and 
-   `:quit`.
-3. Download the vimball at www.vim.org/scripts/script.php?script_id=3560 and 
-   follow 2.
+1. Using __git clone__ manually copy all files
+2. Using __git clone__ launch __vim pairtools.vba__ followed by __:so %__ and __:quit__.
+3. Download the vimball at www.vim.org/scripts/script.php?script_id=3560 and follow 2.
+
 

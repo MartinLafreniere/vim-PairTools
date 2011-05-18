@@ -1,5 +1,5 @@
 " pairtools.vim - PairTools plugin
-" Last Changed: 2011 May 12
+" Last Changed: 2011 May 17
 " Maintainer:   Martin Lafreniere <pairtools@gmail.com>
 "
 " Copyright (C) 2011 by Martin Lafrenière
@@ -30,13 +30,9 @@ endif
 if exists('g:loaded_pairtools')
     finish
 endif
-let g:loaded_pairtools = '1.5'
 
-" ## TEMP STUFF ##
-let g:pairtools_pairclamp = 1
-let g:pairtools_tagwrench = 1
-let g:pairtools_jigsaw    = 1
-" ## TEMP STUFF ##
+" Current version
+let g:loaded_pairtools = '1.5'
 
 
 " PairTools Configuration {{{1
@@ -58,7 +54,7 @@ function! s:SetIMap(Key, FuncName, Command, ...) "{{{2
     " Handle variable arguments for FunName
     let argList = []
     for arg in a:000
-        call add(argList, '"' . escape(arg, '"') . '"')
+        call add(argList, '"' . escape(arg, '"|') . '"')
     endfor
 
     exe 'inoremap <silent> <buffer> ' . a:Key . 
@@ -69,7 +65,7 @@ endfunction "}}}2
 function! s:Configure() "{{{2
 
     "### Configure PairClamp ### {{{3
-    if exists('g:pairtools_pairclamp') && g:pairtools_pairclamp
+    if exists('g:pairtools_'.&ft.'_pairclamp') && g:pairtools_{&ft}_pairclamp
         
         " Options are turn off by default now...
         call s:SetOption('AutoClose', 0)
@@ -85,13 +81,17 @@ function! s:Configure() "{{{2
         " Mappings
         if b:PTAutoClose
             for key in uniq
-                call s:SetIMap(key, 'PairClamp#Close', '', PairClamp#SanitizeKey(key))
+                call s:SetIMap(PairClamp#SanitizeKey(key), 'PairClamp#Close', '', key)
             endfor
         endif
 
         if b:PTForcePairs 
             for key in keys(b:PTWorkPairs)
-                call s:SetIMap('<M-' . key . '>', 'PairClamp#Force', '', PairClamp#SanitizeKey(key)) 
+                if key != '|'
+                    call s:SetIMap('<M-' . key . '>', 'PairClamp#Force', '', key) 
+                else
+                    call s:SetIMap('<C-L><Bar>',       'PairClamp#Force', '', key)
+                endif
             endfor
         endif
 
@@ -100,7 +100,7 @@ function! s:Configure() "{{{2
     endif " }}}3
 
     "### Configure TagWrench ### {{{3
-    if exists('g:pairtools_tagwrench') && g:pairtools_tagwrench
+    if exists('g:pairtools_'.&ft.'_tagwrench') && g:pairtools_{&ft}_tagwrench
 
         call s:SetOption('TagWrenchHook', 'TagWrench#BuiltinNoHook')
 
@@ -118,18 +118,26 @@ function! s:Configure() "{{{2
     endif "}}}3
 
     "### Configure Jigsaw ### {{{3
-    if exists('g:pairtools_jigsaw') && g:pairtools_jigsaw
+    if exists('g:pairtools_'.&ft.'_jigsaw') && g:pairtools_{&ft}_jigsaw
 
         call s:SetIMap('<BS>', 'Jigsaw#Backspace', '')
-
-        call Jigsaw#AddBackspaceHook('PairClamp#Erase', "\<BS>")
-        call Jigsaw#AddBackspaceHook('TagWrench#Erase', "\<BS>")
-
-
         call s:SetIMap('<CR>', 'Jigsaw#CarriageReturn', '')
 
-        call Jigsaw#AddCarriageReturnHook('PairClamp#Expand', "")
-        call Jigsaw#AddCarriageReturnHook('TagWrench#Expand', "")
+		if exists('g:pairtools_'.&ft.'_pairclamp') && g:pairtools_{&ft}_pairclamp
+			call s:SetOption('PCEraser',   0)
+			call s:SetOption('PCExpander', 0)
+
+			call Jigsaw#AddBackspaceHook(b:PTPCEraser ? 'PairClamp#Erase' : 'Jigsaw#NoErase', "\<BS>")
+			call Jigsaw#AddCarriageReturnHook(b:PTPCExpander ? 'PairClamp#Expand' : 'Jigsaw#NoExpand', "")
+		endif
+
+		if exists('g:pairtools_'.&ft.'_tagwrench') && g:pairtools_{&ft}_tagwrench
+			call s:SetOption('TWEraser',   0)
+			call s:SetOption('TWExpander', 0)
+
+			call Jigsaw#AddBackspaceHook(b:PTTWEraser ? 'TagWrench#Erase' : 'Jigsaw#NoErase', "\<BS>")
+			call Jigsaw#AddCarriageReturnHook(b:PTTWExpander ? 'TagWrench#Expand' : 'Jigsaw#NoExpand', "")
+		endif
         
         let b:LoadedJigsaw = 1
 
@@ -252,7 +260,11 @@ function! s:Report()
                 \'AutoClose', 
                 \'ForcePairs', 
                 \'SmartClose', 
-                \'Antimagic')
+                \'Antimagic',
+                \'PCEraser',
+                \'PCExpander',
+                \'TWEraser',
+                \'TWExpander')
 
     call add(report, "PairTools Other Options")
     call s:ReportOptions(report, 'PT',

@@ -2,7 +2,7 @@
 " Maintainer: Martin Lafreniere <pairtools@gmail.com>
 " Last Change: 2011 May 18
 "
-" This is my own configuration file for the VIM Language.
+" This is my own configuration file for HTML.
 " It is free to use, modify and distribute. It is provided "AS IS" with no 
 " warranty.
 

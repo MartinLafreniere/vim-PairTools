@@ -1,5 +1,5 @@
 " jigsaw.vim - PairTools module handling various keys with side-effects
-" Last Changed: 2011 May 17
+" Last Changed: 2011 May 18
 " Maintainer:   Martin Lafreniere <pairtools@gmail.com>
 "
 " Copyright (C) 2011 by Martin Lafrenière

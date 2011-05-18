@@ -1,4 +1,4 @@
-*pairtools.txt*  For Vim version 7.3.  Last change: 2011 March 29
+*pairtools.txt*  For Vim version 7.3.  Last change: 2011 May 18
 
 
 	    PAIRTOOLS 1.5 PLUGIN FOR VIM	by Martin Lafreniere

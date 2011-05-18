@@ -346,6 +346,8 @@ The command line shows up, and a few things can be set:
 	- {count}w		{count} word(s) on the right (match end of words)
 	- {count}W		{count} WORD(s) one the right (match end of WORDs)
 	- t             Around tag name, second input shows up for tag name
+	- /             Prevent closing tag
+	- Nothing		That is, just pressing enter, right after starting tag
 
 For simplicity, we will add the closing tags on the end of line:
 

@@ -398,10 +398,8 @@ endfunction
 
 
 function! TagWrench#BuiltinNoHook(ContextBegin, ContextEnd)
-
     " Do nothing
     return
-    
 endfunction
 
 
@@ -418,8 +416,9 @@ function! TagWrench#BuiltinBasicTagHook(ContextBegin, ContextEnd, ...)
     if index(split(voids, ','), tolower(tagName)) == -1 && startTag !~ '/>$' && startTag !~ '^<[!/]'
 
         let closingPos = s:SurroundClosingTag(a:ContextEnd)
-        
-        call setline('.', line[:(closingPos-1)] . '</' . tagName . '>' . line[(closingPos):])
+        if closingPos > 0
+            call setline('.', line[:(closingPos-1)] . '</' . tagName . '>' . line[(closingPos):])
+        endif
 
     endif
 
@@ -489,6 +488,10 @@ function! s:SurroundClosingTag(OpeningEnd)
         endif
 
         let offset = offset == -1 ? 0 : offset
+
+    elseif motion == '/'
+
+        let offset = -1 * a:OpeningEnd
 
     else 
         let offset = 0

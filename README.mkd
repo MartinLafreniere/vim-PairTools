@@ -54,6 +54,4 @@ Installation
 There are a two ways to install the plugin, the preferred one being 1:
 
 1. Using __git clone__ manually copy all files
-2. Download the vimball at: 
-      www.vim.org/scripts/script.php?script_id=3560
-   Do __vim pairtools.vba__ followed by __:so %__ and __:quit__
+2. Download the vimball at: www.vim.org/scripts/script.php?script_id=3560

@@ -52,7 +52,7 @@ function! TagWrench#StopContext(...)
         endif
 
         " Pressed either '>' or 'Esc' left of '>'
-        if line[cursor] == '>'
+        if line[cursor] == '>' && value == '>'
             " Call a hook for further processing...
             call s:TagHook(b:TWContextBegin, cursor+1)
             call cursor(line('.'), cursor+2)

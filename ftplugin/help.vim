@@ -24,7 +24,7 @@ let g:pairtools_help_pcexpander = 0
 let g:pairtools_help_pceraser   = 1
 
 " Configure TagWrench for things such as <CR>, <buffer>
-let g:pairtools_help_tagwrenchhook = 'TagWrench#BuiltinNoHook'
+let g:pairtools_help_tagwrenchhook = 'tagwrench#BuiltinNoHook'
 let g:pairtools_help_twexpander = 0
 let g:pairtools_help_tweraser   = 1
 

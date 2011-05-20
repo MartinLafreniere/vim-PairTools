@@ -76,21 +76,21 @@ function! s:Configure() "{{{2
         call s:SetOption('Antimagic', 0)
         call s:SetOption('AntimagicField', "String,Comment")
         
-        let uniq = PairClamp#UniquifyCloseKeys()
+        let uniq = pairclamp#UniquifyCloseKeys()
 
         " Mappings
         if b:PTAutoClose
             for key in uniq
-                call s:SetIMap(PairClamp#SanitizeKey(key), 'PairClamp#Close', '', key)
+                call s:SetIMap(pairclamp#SanitizeKey(key), 'pairclamp#Close', '', key)
             endfor
         endif
 
         if b:PTForcePairs 
             for key in keys(b:PTWorkPairs)
                 if key != '|'
-                    call s:SetIMap('<M-' . key . '>', 'PairClamp#Force', '', key) 
+                    call s:SetIMap('<M-' . key . '>', 'pairclamp#Force', '', key) 
                 else
-                    call s:SetIMap('<C-L><Bar>',       'PairClamp#Force', '', key)
+                    call s:SetIMap('<C-L><Bar>',       'pairclamp#Force', '', key)
                 endif
             endfor
         endif
@@ -102,16 +102,16 @@ function! s:Configure() "{{{2
     "### Configure TagWrench ### {{{3
     if exists('g:pairtools_'.&ft.'_tagwrench') && g:pairtools_{&ft}_tagwrench
 
-        call s:SetOption('TagWrenchHook', 'TagWrench#BuiltinNoHook')
+        call s:SetOption('TagWrenchHook', 'tagwrench#BuiltinNoHook')
 
-        call s:SetIMap('<', 'TagWrench#StartContext', '', '<')
-        call s:SetIMap('>', 'TagWrench#StopContext',  '', '>')
+        call s:SetIMap('<', 'tagwrench#StartContext', '', '<')
+        call s:SetIMap('>', 'tagwrench#StopContext',  '', '>')
 
-        call s:SetIMap('<Esc>',  'TagWrench#StopContext', "<Esc>")
-        call s:SetIMap('<Up>',   'TagWrench#StopContext', "<Up>")
-        call s:SetIMap('<Down>', 'TagWrench#StopContext', "<Down>")
-        call s:SetIMap('<Left>',  'TagWrench#StopContextIf', '<Left>',  "L", "<")
-        call s:SetIMap('<Right>', 'TagWrench#StopContextIf', '<Right>', "R", ">")
+        call s:SetIMap('<Esc>',  'tagwrench#StopContext', "<Esc>")
+        call s:SetIMap('<Up>',   'tagwrench#StopContext', "<Up>")
+        call s:SetIMap('<Down>', 'tagwrench#StopContext', "<Down>")
+        call s:SetIMap('<Left>',  'tagwrench#StopContextIf', '<Left>',  "L", "<")
+        call s:SetIMap('<Right>', 'tagwrench#StopContextIf', '<Right>', "R", ">")
 
         let b:LoadedTagWrench = 1
 
@@ -120,23 +120,23 @@ function! s:Configure() "{{{2
     "### Configure Jigsaw ### {{{3
     if exists('g:pairtools_'.&ft.'_jigsaw') && g:pairtools_{&ft}_jigsaw
 
-        call s:SetIMap('<BS>', 'Jigsaw#Backspace', '')
-        call s:SetIMap('<CR>', 'Jigsaw#CarriageReturn', '')
+        call s:SetIMap('<BS>', 'jigsaw#Backspace', '')
+        call s:SetIMap('<CR>', 'jigsaw#CarriageReturn', '')
 
 		if exists('g:pairtools_'.&ft.'_pairclamp') && g:pairtools_{&ft}_pairclamp
 			call s:SetOption('PCEraser',   0)
 			call s:SetOption('PCExpander', 0)
 
-			call Jigsaw#AddBackspaceHook(b:PTPCEraser ? 'PairClamp#Erase' : 'Jigsaw#NoErase', "\<BS>")
-			call Jigsaw#AddCarriageReturnHook(b:PTPCExpander ? 'PairClamp#Expand' : 'Jigsaw#NoExpand', "")
+			call jigsaw#AddBackspaceHook(b:PTPCEraser ? 'pairclamp#Erase' : 'jigsaw#NoErase', "\<BS>")
+			call jigsaw#AddCarriageReturnHook(b:PTPCExpander ? 'pairclamp#Expand' : 'jigsaw#NoExpand', "")
 		endif
 
 		if exists('g:pairtools_'.&ft.'_tagwrench') && g:pairtools_{&ft}_tagwrench
 			call s:SetOption('TWEraser',   0)
 			call s:SetOption('TWExpander', 0)
 
-			call Jigsaw#AddBackspaceHook(b:PTTWEraser ? 'TagWrench#Erase' : 'Jigsaw#NoErase', "\<BS>")
-			call Jigsaw#AddCarriageReturnHook(b:PTTWExpander ? 'TagWrench#Expand' : 'Jigsaw#NoExpand', "")
+			call jigsaw#AddBackspaceHook(b:PTTWEraser ? 'tagwrench#Erase' : 'jigsaw#NoErase', "\<BS>")
+			call jigsaw#AddCarriageReturnHook(b:PTTWExpander ? 'tagwrench#Expand' : 'jigsaw#NoExpand', "")
 		endif
         
         let b:LoadedJigsaw = 1
@@ -228,7 +228,7 @@ autocmd FileType  * call <SID>Configure()
 
 
 " Tag Wrench 'Potential Tag Event'
-autocmd CursorMovedI * if TagWrench#IsTagEvent() | call TagWrench#EnterTagEvent() | endif
+autocmd CursorMovedI * if tagwrench#IsTagEvent() | call tagwrench#EnterTagEvent() | endif
 
 "}}}1
 

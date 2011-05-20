@@ -24,7 +24,7 @@ let g:pairtools_cpp_pcexpander = 1
 let g:pairtools_cpp_pceraser   = 1
 
 " Configure TagWrench
-let g:pairtools_cpp_tagwrenchhook = 'TagWrench#BuiltinNoHook'
+let g:pairtools_cpp_tagwrenchhook = 'tagwrench#BuiltinNoHook'
 let g:pairtools_cpp_twexpander = 0
 let g:pairtools_cpp_tweraser   = 0
 

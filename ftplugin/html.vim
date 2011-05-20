@@ -24,7 +24,7 @@ let g:pairtools_html_pcexpander = 0
 let g:pairtools_html_pceraser   = 1
 
 " Configure TagWrench
-let g:pairtools_html_tagwrenchhook = 'TagWrench#BuiltinHTML5Hook'
+let g:pairtools_html_tagwrenchhook = 'tagwrench#BuiltinHTML5Hook'
 let g:pairtools_html_twexpander = 1
 let g:pairtools_html_tweraser   = 1
 

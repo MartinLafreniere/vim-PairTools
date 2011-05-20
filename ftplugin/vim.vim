@@ -24,7 +24,7 @@ let g:pairtools_vim_pcexpander = 0
 let g:pairtools_vim_pceraser   = 1
 
 " Configure TagWrench
-let g:pairtools_vim_tagwrenchhook = 'TagWrench#BuiltinNoHook'
+let g:pairtools_vim_tagwrenchhook = 'tagwrench#BuiltinNoHook'
 let g:pairtools_vim_twexpander = 0
 let g:pairtools_vim_tweraser   = 1
 

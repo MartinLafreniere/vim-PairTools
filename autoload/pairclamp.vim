@@ -25,7 +25,7 @@
 " PairClamp Auto-Close {{{1
 
 
-function! PairClamp#Close(Key)
+function! pairclamp#Close(Key)
 
     if !b:PTAutoClose
         return a:Key
@@ -236,7 +236,7 @@ endfunction
 
 " PairClamp Force Pair {{{1
 
-function! PairClamp#Force(Key)
+function! pairclamp#Force(Key)
 
     if b:PTForcePairs
         call s:InsertClosing(a:Key)
@@ -249,7 +249,7 @@ endfunction
 
 " PairClamp Erase {{{1
 
-function! PairClamp#Erase()
+function! pairclamp#Erase()
 
     " This function only remove the closing key
     let result = 0
@@ -277,7 +277,7 @@ endfunction
 
 " PairClamp Expansion {{{1
 
-function! PairClamp#Expand()
+function! pairclamp#Expand()
 
     let line   = getline('.')
     let column = col('.') - 1
@@ -413,7 +413,7 @@ function! s:ToWorkPairs(String)
 endfunction
 
 
-function! PairClamp#UniquifyCloseKeys(...)
+function! pairclamp#UniquifyCloseKeys(...)
 
     " Use provided pairs as working pairs if passed to function
     let b:PTWorkPairs = s:ToWorkPairs(a:0 > 0 ? a:000[0] : b:PTClosePairs)
@@ -434,7 +434,7 @@ function! PairClamp#UniquifyCloseKeys(...)
 
 endfunction
 
-function! PairClamp#SanitizeKey(Key)
+function! pairclamp#SanitizeKey(Key)
 
     let specialKeys  = {'|': '<Bar>'}
     

@@ -7,7 +7,7 @@
 " Permission is hereby granted, free of charge, to any person obtaining a copy
 " of this software and associated documentation files (the "Software"), to deal
 " in the Software without restriction, including without limitation the rights
-" to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+" to use, copy, todify, merge, publish, distribute, sublicense, and/or sell
 " copies of the Software, and permit persons to whom the Software is furnished
 " to do so, subject to the following conditions:
 " 
@@ -24,7 +24,7 @@
 
 " Angle Brackets Auto-Close Event/Context {{{1
 
-function! TagWrench#StartContext(Value)
+function! tagwrench#StartContext(Value)
 
     " Make sure no context was previously started to fire a Tag Event
     if !exists('b:TWContext') || !b:TWContext
@@ -37,7 +37,7 @@ function! TagWrench#StartContext(Value)
 endfunction
 
 
-function! TagWrench#StopContext(...)
+function! tagwrench#StopContext(...)
 
     let value = (a:0 > 0 ? a:000[0] : '')
 
@@ -95,7 +95,7 @@ function! s:IsAttributeContext()
 endfunction
 
 
-function! TagWrench#StopContextIf(Direction, Value)
+function! tagwrench#StopContextIf(Direction, Value)
 
     let line   = getline('.')
     let cursor = col('.') - 1
@@ -146,7 +146,7 @@ function! s:IsContextUnclosed()
 endfunction
 
 
-function! TagWrench#EnterTagEvent()
+function! tagwrench#EnterTagEvent()
 
     if !exists('b:TWContextBegin')
         let b:TWContextBegin = s:FindContextBegin('<')
@@ -186,7 +186,7 @@ function! TagWrench#EnterTagEvent()
 endfunction
 
 
-function! TagWrench#IsTagEvent()
+function! tagwrench#IsTagEvent()
 
     if !exists('b:TWTagEvent')
         let b:TWContext  = 0
@@ -201,7 +201,7 @@ endfunction
 
 " Angle Brackets Erase {{{1
 
-function! TagWrench#Erase()
+function! tagwrench#Erase()
 
     let line   = getline('.')
     let column = col('.') - 1
@@ -327,7 +327,7 @@ endfunction
 
 " Angle Brackets Expansion {{{1
 
-function! TagWrench#Expand()
+function! tagwrench#Expand()
 
     let line   = getline('.')
     let column = col('.') - 1
@@ -368,9 +368,9 @@ endfunction
 function! s:TagHook(ContextBegin, ContextEnd)
 
     " Add built in hook if not already done
-    call TagWrench#AddHook('TagWrench#BuiltinNoHook')
-    call TagWrench#AddHook('TagWrench#BuiltinBasicTagHook')
-    call TagWrench#AddHook('TagWrench#BuiltinHTML5Hook')
+    call tagwrench#AddHook('tagwrench#BuiltinNoHook')
+    call tagwrench#AddHook('tagwrench#BuiltinBasicTagHook')
+    call tagwrench#AddHook('tagwrench#BuiltinHTML5Hook')
 
     if index(g:PTTagWrenchHookTable, b:PTTagWrenchHook) > -1
         exe 'call ' . b:PTTagWrenchHook . '(' .a:ContextBegin . ',' . a:ContextEnd . ')'
@@ -384,7 +384,7 @@ endfunction
 "   1. Context Begin: this is the position of the < character
 "   2. Context End:   this is the position after the > character
 "   See BuiltinBasicTagHook for an example.
-function! TagWrench#AddHook(HookFullName)
+function! tagwrench#AddHook(HookFullName)
 
     if !exists('g:PTTagWrenchHookTable')
         let g:PTTagWrenchHookTable = []
@@ -397,7 +397,7 @@ function! TagWrench#AddHook(HookFullName)
 endfunction
 
 
-function! TagWrench#BuiltinNoHook(ContextBegin, ContextEnd)
+function! tagwrench#BuiltinNoHook(ContextBegin, ContextEnd)
     " Do nothing
     return
 endfunction
@@ -405,7 +405,7 @@ endfunction
 
 " Simple tag handling: complement starting <tag> with ending </tag>
 " Arguments: Receives the context begin (tag <) and context end (tag >)
-function! TagWrench#BuiltinBasicTagHook(ContextBegin, ContextEnd, ...)
+function! tagwrench#BuiltinBasicTagHook(ContextBegin, ContextEnd, ...)
 
     let line = getline('.')
     
@@ -425,12 +425,12 @@ function! TagWrench#BuiltinBasicTagHook(ContextBegin, ContextEnd, ...)
 endfunction
 
 
-function! TagWrench#BuiltinHTML5Hook(ContextBegin, ContextEnd)
+function! tagwrench#BuiltinHTML5Hook(ContextBegin, ContextEnd)
 
     " Define HTML5 void elements
     let voids = "area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr"
 
-    call TagWrench#BuiltinBasicTagHook(a:ContextBegin, a:ContextEnd, voids)
+    call tagwrench#BuiltinBasicTagHook(a:ContextBegin, a:ContextEnd, voids)
 
 endfunction
 

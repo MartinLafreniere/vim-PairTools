@@ -24,7 +24,7 @@
  
 " Backspace Hook API {{{1
 
-function! Jigsaw#Backspace()
+function! jigsaw#Backspace()
 
     let line   = getline('.')
     let column = col('.') - 1
@@ -46,7 +46,7 @@ endfunction
 " Public function provided to the user to add custom hooks
 "   A hook must 0 if not executing in its context, else 1
 "
-function! Jigsaw#AddBackspaceHook(HookFullName, HookReturnValue)
+function! jigsaw#AddBackspaceHook(HookFullName, HookReturnValue)
 
     if !exists('b:PTBackspaceHookTable')
         let b:PTBackspaceHookTable = {}
@@ -58,7 +58,7 @@ function! Jigsaw#AddBackspaceHook(HookFullName, HookReturnValue)
 
 endfunction
 
-function! Jigsaw#NoErase()
+function! jigsaw#NoErase()
     return 0
 endfunction
 
@@ -66,7 +66,7 @@ endfunction
 
 " Carriage Return Hook API {{{1
 
-function! Jigsaw#CarriageReturn()
+function! jigsaw#CarriageReturn()
 
     let line   = getline('.')
     let column = col('.') - 1
@@ -89,7 +89,7 @@ endfunction
 " Public function provided to the user to add custom hooks
 "   A hook must 0 if not executing in its context, else 1
 "
-function! Jigsaw#AddCarriageReturnHook(HookFullName, HookReturnValue)
+function! jigsaw#AddCarriageReturnHook(HookFullName, HookReturnValue)
 
     if !exists('b:PTCarriageReturnHookTable')
         let b:PTCarriageReturnHookTable = {}
@@ -101,7 +101,7 @@ function! Jigsaw#AddCarriageReturnHook(HookFullName, HookReturnValue)
 
 endfunction
 
-function! Jigsaw#NoExpand()
+function! jigsaw#NoExpand()
     return 0
 endfunction
 

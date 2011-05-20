@@ -155,8 +155,8 @@ endfunction "}}}2
 
 function! s:Destroy() "{{{2     
 
-    " PairClamp Unset/Unlet {{{3
-    if exists('g:pairtools_pairclamp') && g:pairtools_pairclamp
+    " PairClamp Unset/Unlet {{{3 
+    if exists('g:pairtools_'.&ft.'_pairclamp') && g:pairtools_{&ft}_pairclamp
 
         if exists('b:LoadedPairClamp')
 
@@ -174,7 +174,7 @@ function! s:Destroy() "{{{2
     endif "}}}3
 
     " TagWrench Unset/Unlet {{{3
-    if exists('g:pairtools_tagwrench') && g:pairtools_tagwrench 
+    if exists('g:pairtools_'.&ft.'_tagwrench') && g:pairtools_{&ft}_tagwrench 
 
         if exists('b:LoadedPairClamp')
 
@@ -194,7 +194,7 @@ function! s:Destroy() "{{{2
     endif "}}}3
 
     " Jigsaw Unset {{{3
-    if exists('g:jigsaw_enable') && g:jigsaw_enable 
+    if exists('g:jigsaw_'.&ft.'_enable') && g:jigsaw_{&ft}_enable 
         
         if exists('b:LoadedJigsaw')
         

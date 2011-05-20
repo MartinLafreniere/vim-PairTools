@@ -1,4 +1,4 @@
-" tagwrench.vim - PairTools module handling angle brackets pair and XML/HTML tags
+" TagWrench.vim - PairTools module handling angle brackets pair and XML/HTML tags
 " Last Changed: 2011 May 18
 " Maintainer:   Martin Lafreniere <pairtools@gmail.com>
 "

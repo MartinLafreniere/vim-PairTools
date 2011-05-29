@@ -2,7 +2,7 @@
 " Last Changed: 2011 May 25
 " Maintainer:   Martin Lafreniere <pairtools@gmail.com>
 "
-" Copyright (C) 2011 by Martin Lafrenière
+" Copyright (C) 2011 by Martin Lafreniï¿½re
 " 
 " Permission is hereby granted, free of charge, to any person obtaining a copy
 " of this software and associated documentation files (the "Software"), to deal

@@ -18,6 +18,7 @@ let g:pairtools_cpp_forcepairs = 0
 let g:pairtools_cpp_closepairs = "(:),[:],{:},':'"
 let g:pairtools_cpp_smartclose = 1
 let g:pairtools_cpp_smartcloserules = '\w,(,&,\*'
+let g:pairtools_cpp_apostrophe = 0
 let g:pairtools_cpp_antimagic  = 1
 let g:pairtools_cpp_antimagicfield  = "Comment,String,Special"
 let g:pairtools_cpp_pcexpander = 1

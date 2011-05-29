@@ -1,10 +1,10 @@
-VIM PairTools 1.5
-=================
+VIM PairTools 1.5.2
+===================
 
 Changes
 -------
 
-PairTools has progressed to version 1.5 with many additions and modifications.
+PairTools has progressed to version 1.5.2 with many additions and modifications.
 The plugin architecture underwent a major rework and the following changes
 occured:
 
@@ -34,7 +34,10 @@ occured:
     So it will require some renaming from users of version 1.0. Also, as of 
     version 1.5, all options are disabled by default.
 
-6.  A vimball is now provided and can be downloaded at:
+6.  New 'Apostrophe' options added to avoid the quote to auto-close after a
+    letter.
+
+7.  A vimball is now provided and can be downloaded at:
     http://www.vim.org/scripts/script.php?script_id=3560
 
 

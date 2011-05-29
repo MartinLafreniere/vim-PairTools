@@ -1,33 +1,34 @@
-*pairtools.txt*  For Vim version 7.3.  Last change: 2011 May 18
+*pairtools.txt*  For Vim version 7.3.  Last change: 2011 May 25
 
 
-	    PAIRTOOLS 1.5 PLUGIN FOR VIM	by Martin Lafreniere
+	    PAIRTOOLS 1.5.2 PLUGIN FOR VIM	by Martin Lafreniere
 
 
 Help on PairTools                                     *pairtools-help*
 
-|1.| Introduction					|pairtools-intro|
-|2.| PairClamp						|pairtools-pairclamp|
-  |2.1| Auto-Close						|pairclamp-autoclose|
-  |2.2| Force Pairs						|pairclamp-forcepairs|
-  |2.3| Smart Close						|pairclamp-smartclose|
-  |2.4| Antimagic						|pairclamp-antimagic|
-  |2.5| Eraser							|pairclamp-eraser|
-  |2.6| Expander						|pairclamp-expander|
-|3.| TagWrench						|pairtools-tagwrench|
-  |3.1| Hooks							|tagwrench-hooks|
-  |3.2| Eraser							|tagwrench-eraser|
-  |3.3| Expander						|tagwrench-expander|
-|4.| Jigsaw							|pairtools-jigsaw|
-|5.| Installation                   |pairtools-install|
-|6.| Filetype Files Examples		|pairtools-examples|
-|7.| Few Thoughts					|pairtools-thoughts|
-|8.| License                        |pairtools-license|
-|9.| Credits                        |pairtools-credits|
+1.  Introduction					|pairtools-intro|
+2.  PairClamp						|pairtools-pairclamp|
+  2.1 Auto-Close						|pairclamp-autoclose|
+  2.2 Force Pairs						|pairclamp-forcepairs|
+  2.3 Smart Close						|pairclamp-smartclose|
+  2.4 Antimagic							|pairclamp-antimagic|
+  2.5 Eraser							|pairclamp-eraser|
+  2.6 Expander							|pairclamp-expander|
+3.  TagWrench						|pairtools-tagwrench|
+  3.1 Hooks								|tagwrench-hooks|
+  3.2 Eraser							|tagwrench-eraser|
+  3.3 Expander							|tagwrench-expander|
+4.  Jigsaw							|pairtools-jigsaw|
+5.  Installation					|pairtools-install|
+6.  Filetype Files Examples			|pairtools-examples|
+7.  Few Thoughts					|pairtools-thoughts|
+8.  License							|pairtools-license|
+9.  Credits							|pairtools-credits|
+10. Changes							|pairtools-changes|
 
  
 ==============================================================================
-*1.* Introduction										*pairtools-intro*
+1. Introduction											*pairtools-intro*
 
 The PairTools plugin can be seen as a "bundle" of tools to handle various
 "pair" operations. It also offers a flexible way to set pairs and options per
@@ -53,17 +54,29 @@ specify all the options he wants to enable for HTML editing; he must do so
 inside his ftplugin/html.vim. If that user also edits PHP file then he must
 also specify a ftplugin/php.vim file with his options set for PHP.
 
+There is a command tool to generate a {filetype}.vim file into ~\.vim or
+~/vimfiles. Type :PairToolsSampleFile <filetype> to generate a sample file.
+Example: >
+	
+	PairToolsSampleFile python
+<
+This will generate a python.vim file with all options in ~/.vim or ~\vimfiles
+and all the user has to do is to copy the file inside the appropriate ftplugin
+directory and modify the options value. For more flexibility, the user can set
+the g:pairtools_samplefile_path variable from his .vimrc to specify the 
+destination path for the generated files. 
+
 Report
 
 The plugin feature a simple "report" command. Type :PairToolsReport and it
-will show all option values.
+will show all options value.
 
 
 Note: Version 1.0 included a surround feature now removed. The user is 
       encouraged to use the surround plugin for vim instead.
 
 ==============================================================================
-*2.* PairClamp											*pairtools-pairclamp*
+2. PairClamp											*pairtools-pairclamp*
 
 The PairClamp module handle all operations involving single character pairs.
 This include auto-closing a pair, stepping out from a pair, forcing a pair,
@@ -76,7 +89,7 @@ the following: >
 	let g:pairtools_{filetype}_pairclamp = 1
 <
 
-*2.1* Auto-Close										*pairclamp-autoclose*
+2.1 Auto-Close											*pairclamp-autoclose*
 
 In order to use that feature, the user must enable it and specify which pairs
 he wants to work with. To do so he must set these options into his filetype
@@ -104,7 +117,7 @@ opening character. Now let's write something inside these parens:
 Now when the user press the closing character when next to (and left of) the
 closing character, it will automatically push the cursor on the right of it.
 
-*2.2* Force Pairs										*pairclamp-forcepairs*
+2.2 Force Pairs											*pairclamp-forcepairs*
 
 Sometimes, it is useful to be able to force a pair to automatically close. For
 example, the antimagic feature will prevent auto-closing inside some syntax
@@ -138,7 +151,7 @@ will yield to:
 Then the user can type his text and then pressing " three times will get him
 out.
 
-*2.3* Smart Close										*pairclamp-smartclose*
+2.3 Smart Close											*pairclamp-smartclose*
 
 This feature can prevent auto-closing in some situations. These situations are
 specified using a list of regex-like expressions. The user has to enable the
@@ -162,7 +175,7 @@ Then the smartcloserule list can be considered to be '\w,(,[,"'. As rules are
 are using as regex-like expression, it is important to escape the following 
 characters: \*, \., \$ and \^.
 
-*2.4* Antimagic											*pairclamp-antimagic*
+2.4 Antimagic											*pairclamp-antimagic*
 
 The antimagic feature allows to define syntax areas as antimagic fields, where
 pairclamp auto-closing "magic" is prevented. To enable antimagic and set
@@ -174,7 +187,7 @@ file, add the following: >
 
 This will prevent auto-close inside comments, strings and special areas.
 
-*2.5* Eraser											*pairclamp-eraser*
+2.5 Eraser												*pairclamp-eraser*
 
 This feature allows to erase a whole pair using the backspace key. Using the
 python example, the user can enable it using: >
@@ -189,7 +202,7 @@ Example:
     Backspacing till (:		(|)
     One more backspace:		|
 
-*2.6* Expander											*pairclamp-expander*
+2.6 Expander											*pairclamp-expander*
 
 The expander work when the carriage return key is hit when in-between
 characters forming a pair. Using the python filetype as earlier, one can
@@ -210,7 +223,7 @@ indentation, then a second enter and finally put back the cursor on the
 indentation.
 
 ==============================================================================
-*3.* TagWrench											*pairtools-tagwrench*
+3. TagWrench											*pairtools-tagwrench*
 
 This module is dedicated to the angle brackets <,> and tags formed by them.
 Using the angle brackets pair inside PairClamp can lead to very confusing
@@ -230,9 +243,9 @@ will be set to a void hook. Here is an example of VIM script options the user
 can set to enable tagwrench with a void hook: >
 
 	let g:pairtools_vim_tagwrench = 1
-	let g:pairtools_vim_tagwrenchhook = 'TagWrench#BuiltinNoHook'
+	let g:pairtools_vim_tagwrenchhook = 'tagwrench#BuiltinNoHook'
 <
-The TagWrench#BuiltinNoHook is a hook function defined inside the TagWrench
+The tagwrench#BuiltinNoHook is a hook function defined inside the TagWrench
 module that does nothing. It is useful when the user does not want to use any
 of the provided hooks.
 
@@ -294,22 +307,22 @@ an html document, such as PHP code.
 
 And the context immediatly ends.
 
-*3.1* Hooks												*tagwrench-hooks*
+3.1 Hooks												*tagwrench-hooks*
 
 The power of this module resides in the hook functions. When pressing the 
 closing angle bracket to step out, the specified hook function is called for 
 further processing. As we saw earlier a hook can be set as follow. The example
 show how it can be set for an html filetype: >
 
-	let g:pairtools_html_tagwrenchhook = 'TagWrench#BuiltinBasicTagHook'
+	let g:pairtools_html_tagwrenchhook = 'tagwrench#BuiltinBasicTagHook'
 <
 Currently there are three builtin hooks:
 
-TagWrench#BuiltinNoHook: 
+tagwrench#BuiltinNoHook: 
 
 This is the void hook, which does nothing and returns.
 
-TagWrench#BuiltinBasicTagHook:
+tagwrench#BuiltinBasicTagHook:
 
 This is a basic tag builder that automatically add an ending tag when the 
 starting tag does not end with />, i.e. it ends with a single >. Also, tags 
@@ -361,7 +374,7 @@ Then, we want to add a span element to Hello:
 
 * Note: current this feature only work inside a single line.
 
-TagWrench#BuiltinHTML5Hook:
+tagwrench#BuiltinHTML5Hook:
 
 It calls the BuiltinBasicTagHook, passing it a list of tags to do not insert 
 an ending tag. It follows all the rules from the basic tag hook plus it looks 
@@ -375,14 +388,14 @@ For example:
 	We have:                   <div id="main"|>
     Pressing > produces:	   <div id="main">|</div>
 
-TagWrench Hook Public API							*tagwrench-hookapi*
+TagWrench Hook Public API								*tagwrench-hookapi*
 
 It is possible for the user to make its own hook function and set it as the
 current filetype TagWrench hook using the TagWrench Hook Public API.
 
 Remember that while in a tag context, pressing > left of the tag ending > will
 automatically call the specified hook for further processing. The user can use
-the public function TagWrench#AddHook() to insert another hook. This function
+the public function tagwrench#AddHook() to insert another hook. This function
 needs an arguments: the full name of the hook function.
 
 The hook function must take at least two arguments:
@@ -399,7 +412,7 @@ earlier plus an optional arguments to specify which tag names do no trigger
 any closing tags. The tag names are specified in a commas separated string
 list. Example: "img,link,meta".
 
-*3.2* Eraser											*tagwrench-eraser*
+3.2 Eraser												*tagwrench-eraser*
 
 The TagWrench eraser can delete either a single tag or a pair of starting and
 ending tags, by pressing backspace. We will illustrate how it works with an
@@ -415,7 +428,7 @@ example:
     Pressing backspace:        <div id="main">|
     Pressing backspace again:  |
 
-*3.3* Expander											*tagwrench-expander*
+3.3 Expander											*tagwrench-expander*
 
 The TagWrench expander expand a starting and ending tag and the special <%,%> 
 and <?,?> much the same way the PairClamp expander expands brackets. The
@@ -437,9 +450,8 @@ For example:
                                    |
 		                       ?>
 
-
 ==============================================================================
-*4.* Jigsaw												*pairtools-jigsaw*
+4. Jigsaw												*pairtools-jigsaw*
 
 The Jigsaw module is the central part to make then erasers and expanders of
 both PairClamp and TagWrench work altogether. Here, we use hook functions to 
@@ -447,8 +459,8 @@ tell these when a given key is pressed, such as <BS> and <CR>.
 
 Jigsaw current defines two functions:
 
-	1. Jigsaw#Backspace: mapped to <BS>
-	2. Jigsaw#CarriageReturn: mapped to <CR>
+	1. jigsaw#Backspace: mapped to <BS>
+	2. jigsaw#CarriageReturn: mapped to <CR>
 
 When one of these function is called by pressing a key, it will look execute
 the hook functions until one has executed. Then, the return value associated
@@ -459,8 +471,8 @@ for Backspace and <CR> for CarriageReturn.
 
 It is possible to add more function using their public hook API:
 
-	1. Jigsaw#AddBackspaceHook
-	2. Jigsaw#AddCarriageReturnHook
+	1. jigsaw#AddBackspaceHook
+	2. jigsaw#AddCarriageReturnHook
 
 These functions need two arguments:
 	
@@ -471,10 +483,10 @@ Right now, the hook functions do not take any argument, but that could change
 later on.
 
 For the PairClamp and TagWrench modules, for example, the eraser functions are
-hook for Jigsaw#Backspace.
+hook for jigsaw#Backspace.
 
 ==============================================================================
-*5.* Installation										*pairtools-install*
+5. Installation											*pairtools-install*
 
 There are a few ways to install the plugin:
 
@@ -485,7 +497,7 @@ There are a few ways to install the plugin:
    follow 2.
 
 ==============================================================================
-*6.* Filetype Files Examples							*pairtools-examples*
+6. Filetype Files Examples								*pairtools-examples*
 
 See the ftplugin/ files included in the github repository:
 	
@@ -493,7 +505,7 @@ See the ftplugin/ files included in the github repository:
 
 
 ==============================================================================
-*7.* Few Thoughts                                       *pairtools-thoughts*
+7. Few Thoughts											*pairtools-thoughts*
 
 - Using the repeat command '.' with |auto-close| doesn't work as expected by a 
   user. The closing character will not appear even though the user type the
@@ -503,7 +515,7 @@ See the ftplugin/ files included in the github repository:
   comment in VIM language file will result in an auto-closed pair.
 
 ==============================================================================
-*8.* License                                            *pairtools-license*
+8. License												*pairtools-license*
 
 The PairTools plugin and this help file are licensed under the MIT license.
 
@@ -528,12 +540,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 ==============================================================================
-*9.* Credits                                            *pairtools-credits*
+9. Credits												*pairtools-credits*
 
 The author of this plugin is Martin Lafrenière <pairtools@gmail.com>.
+Project hosted at: https://github.com/MartinLafreniere/vim-PairTools.
 
 ==============================================================================
-*10.* Changes
+10. Changes												*pairtools-changes*
+
+Version 1.5.2
+- Add command to auto-generate {filetype}.vim configuration files.
+- Add apostrophe option.
+- Support hyphen (-) and colon (:) in tag names.
+- Fixed smartclose bug.
+
+Version 1.5.1
+- Renamed module name using camelcase to lowercase.
+- Fixed minor bugs inside tagwrench.
 
 Version 1.5
 - Major rework of the plugin architure, now subdivided into modules. PairTools

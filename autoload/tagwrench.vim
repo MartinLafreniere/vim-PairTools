@@ -1,5 +1,5 @@
 " TagWrench.vim - PairTools module handling angle brackets pair and XML/HTML tags
-" Last Changed: 2011 May 18
+" Last Changed: 2011 May 25
 " Maintainer:   Martin Lafreniere <pairtools@gmail.com>
 "
 " Copyright (C) 2011 by Martin Lafrenière
@@ -254,7 +254,7 @@ function! s:RemoveMatchedTags()
     endif
 
     " Get closing tag name (remove starting </)
-    let closingName = matchstr(line[(column + 2):], '^\w\+')
+    let closingName = matchstr(line[(column + 2):], '^[[:alnum:]_:-]\+')
     
     let closingLength = strlen(closingName)
 
@@ -294,7 +294,7 @@ function! s:RemoveVoidTag()
     let start = column - 1
 
     let skip = 0
-    while (skip || line[(start):] !~ '^<[!/]\?\w\+') && start > -1
+    while (skip || line[(start):] !~ '^<[!/]\?\w') && start > -1
         if line[start] =~ '["'']' && line[start - 1] != '\'
             let skip = !skip
         endif
@@ -410,7 +410,7 @@ function! tagwrench#BuiltinBasicTagHook(ContextBegin, ContextEnd, ...)
     let line = getline('.')
     
     let startTag = line[(a:ContextBegin):(a:ContextEnd-1)]
-    let tagName  = matchstr(startTag, '^<\zs!\?\w\+')
+    let tagName  = matchstr(startTag, '^<\zs!\?[[:alnum:]_:-]\+')
     
     let voids = (a:0 > 0 ? a:000[0] : '')
     if index(split(voids, ','), tolower(tagName)) == -1 && startTag !~ '/>$' && startTag !~ '^<[!/]'

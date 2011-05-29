@@ -18,6 +18,7 @@ let g:pairtools_help_forcepairs = 0
 let g:pairtools_help_closepairs = "*:*,|:|,':'"
 let g:pairtools_help_smartclose = 1
 let g:pairtools_help_smartcloserules = '\w'
+let g:pairtools_help_apostrophe = 1
 let g:pairtools_help_antimagic  = 0
 let g:pairtools_help_antimagicfield  = ""
 let g:pairtools_help_pcexpander = 0

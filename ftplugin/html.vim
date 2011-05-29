@@ -18,6 +18,7 @@ let g:pairtools_html_forcepairs = 0
 let g:pairtools_html_closepairs = "':'" . ',":"'
 let g:pairtools_html_smartclose = 1
 let g:pairtools_html_smartcloserules = '\w'
+let g:pairtools_html_apostrophe = 0
 let g:pairtools_html_antimagic  = 1
 let g:pairtools_html_antimagicfield  = "Comment,String"
 let g:pairtools_html_pcexpander = 0

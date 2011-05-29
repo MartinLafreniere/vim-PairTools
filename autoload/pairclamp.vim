@@ -1,5 +1,5 @@
 " PairClamp.vim - PairTools module handling single character pairs
-" Last Changed: 2011 May 18
+" Last Changed: 2011 May 25
 " Maintainer:   Martin Lafreniere <pairtools@gmail.com>
 "
 " Copyright (C) 2011 by Martin Lafrenière
@@ -78,7 +78,11 @@ function! s:IsAllowClose(Key)
         return 0
     endif
 
-    if b:PTSmartClose && line[column + 1] =~ s:SmartRegex()
+    if b:PTSmartClose && line[column] =~ s:SmartRegex()
+        return 0
+    endif
+
+    if b:PTApostrophe && line[column - 1] =~ '\a'
         return 0
     endif
 
@@ -136,6 +140,11 @@ function! s:RemoveMatchedPairs()
         let b:PTReQuoteCache.regex = '\%(' . join(s:BuildRegex(), '\|') . '\)'
     endif
     
+    " Remove apostrophe
+    if b:PTApostrophe
+        let line = substitute(line, '\a\zs''', '', 'g')
+    endif
+
     " Remove matched pairs
     let index = match(line, b:PTReQuoteCache.regex)
 

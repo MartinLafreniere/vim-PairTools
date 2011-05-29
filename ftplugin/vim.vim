@@ -18,6 +18,7 @@ let g:pairtools_vim_forcepairs = 0
 let g:pairtools_vim_closepairs = "(:),[:],{:},':'"
 let g:pairtools_vim_smartclose = 1
 let g:pairtools_vim_smartcloserules = '\w,('
+let g:pairtools_vim_apostrophe = 0
 let g:pairtools_vim_antimagic  = 1
 let g:pairtools_vim_antimagicfield  = "Comment,String"
 let g:pairtools_vim_pcexpander = 0
